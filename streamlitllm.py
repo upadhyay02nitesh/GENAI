@@ -2,8 +2,17 @@ from langchain_openai import ChatOpenAI
 from langchain.prompts import PromptTemplate,load_prompt
 from dotenv import load_dotenv
 import streamlit as st
+import os
 load_dotenv()
+api_key = os.getenv("OPENAI_API_KEY")
 
+# Check and display result in Streamlit
+st.title("API Key Checker")
+
+if api_key:
+    st.success("✅ API key loaded successfully.")
+else:
+    st.error("❌ API key not found. Check your .env file.")
 llm = ChatOpenAI(model="gpt-4",temperature=0.1,max_completion_tokens=1000)
 # st.header("Chat with LLM")
 # input=st.text_input("Enter your query:", key="query_input")
@@ -51,7 +60,7 @@ difficulty_clause = f"Assume the problem is {difficulty.lower()} level." if diff
 #     question=math_question,
 #     explanation_clause=explanation_clause,
 #     style_clause=style_clause,
-#     difficulty_clause=difficulty_clause
+
 # )
 
 # template.save("math_problem_solver_prompt.json")
