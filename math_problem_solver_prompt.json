@@ -1,0 +1,18 @@
+{
+    "name": null,
+    "input_variables": [
+        "difficulty_clause",
+        "explanation_clause",
+        "question",
+        "style_clause"
+    ],
+    "optional_variables": [],
+    "output_parser": null,
+    "partial_variables": {},
+    "metadata": null,
+    "tags": null,
+    "template": "\nSolve this math problem: {question}\n\nProvide only a one-line short answer first.\n\n{explanation_clause}\n\n{style_clause}\n\n{difficulty_clause}\n",
+    "template_format": "f-string",
+    "validate_template": false,
+    "_type": "prompt"
+}

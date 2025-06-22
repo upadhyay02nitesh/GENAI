@@ -1,0 +1,4 @@
+HumanMessage("Hi, how can I track my order?"),
+    AIMessage("You can track your order using the tracking link sent to your email."),
+    HumanMessage("I lost the email."),
+    AIMessage("No worries, I’ve sent a new tracking link to your registered email.")

@@ -1,0 +1,44 @@
+
+from langchain_openai import ChatOpenAI
+from dotenv import load_dotenv
+from pydantic import BaseModel,Field
+from typing import Optional,Annotated,Literal
+
+load_dotenv()
+
+model = ChatOpenAI(
+    model="gpt-4",
+    temperature=0.1,
+    max_completion_tokens=1000
+)
+
+
+class Review(BaseModel):
+    summary:str=Field(description='A brief summary of the review.')
+    sentiment:Literal["positive","Negative"]=Field(description="The overall sentiment of the review, such as positive, negative, or neutral")
+    key_themes:list[str]=Field(description="A list of key themes or topics mentioned in the review")
+    pros:Optional[str]=Field(default=None,description="A list of positive aspects mentioned in the review")
+    cons:Optional[str]=Field(default=None,description="A list of negative aspects mentioned in the review")
+    rating:int=Field(gt=3,lt=6,default=5,description="This parameter provide rating dor this product")
+
+structured_model=model.with_structured_output(Review)
+
+# data={'summary':'its too good product','sentiment':'positive','rating':2}
+# data=Review(**data)
+# print(data)
+
+
+result = structured_model.invoke("""This smartwatch is sleek, lightweight, and fits comfortably on the wrist.
+The battery life lasts up to 5 days, which is quite impressive.
+Health tracking features like heart rate and sleep monitor are accurate.
+Overall, it's a great value for the price and highly recommended!
+However, the customer service is responsive and helpful.
+I would rate it 4 out of 5 stars.""")
+
+
+print(type(result))
+# # print("Summary:", result['summary'])
+# # print("Sentiment:", result['sentiment'])
+
+
+
