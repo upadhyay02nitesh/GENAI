@@ -28,7 +28,7 @@ st.markdown("""
         font-size: 16px;
         line-height: 1.5;
         color: #f1f1f1;
-    }
+    }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
     .user {
         background-color: #1e88e5;  /* Blue for user */
         margin-left: auto;
